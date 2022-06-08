@@ -1,0 +1,23 @@
+<footer class="footer">
+  <div class="footer__inner">
+    {{ if $.Site.Copyright }}
+      <div class="copyright copyright--user">
+        <span>{{ $.Site.Copyright | safeHTML }}</span>
+    {{ else }}
+      <div class="copyright">
+        <span>© {{ now.Year }} chris yx lee</span>
+    {{ end }}
+        <span>:: built with <a href="https://github.com/panr/hugo-theme-terminal">hugo theme terminal</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="{{ "assets/main.js" | absURL }}"></script>
+<script src="{{ "assets/prism.js" | absURL }}"></script>
+
+{{ if $.Site.Params.showLanguageSelector }}
+  <script src="{{ "assets/languageSelector.js" | absURL }}"></script>
+{{ end }}
+
+<!-- Extended footer section-->
+{{ partial "extended_footer.html" . }}
