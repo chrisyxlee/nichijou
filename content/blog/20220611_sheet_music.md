@@ -1,6 +1,19 @@
 ---
-title: "music"
+title: piano covers on youtube
+date: 2022-06-11
+aliases:
+- /sheet_music
+tags:
+- piano
+- youtube
+- sheets
+- music
+showFullContent: false
+readingTime: false
+hideComments: true
 ---
+
+Sheets at the bottom.
 
 I have a tough relationship with music. I used to make arrangements and upload piano covers to [YouTube](https://www.youtube.com/chris3169512) from when I was 13 to 18 years old. I stopped after I went to college, but I worked hard on the sheets and want them to still be available.
 
