@@ -1,8 +1,9 @@
-+++
-title = "about"
-+++
+---
+title: "about"
+---
 
 I'm chris!
+
 - a backend software engineer
 - lots of opinions on reliability, automation, code health, and data processing
 - loves spreadsheets and diagrams
