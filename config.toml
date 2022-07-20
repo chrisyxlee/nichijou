@@ -64,20 +64,20 @@ paginate = 10
   [languages.en]
     languageName = "English"
     title = "chris yx lee"
-    subtitle = "chris yx lee - software engineer"
+    subtitle = "chris yx lee - software engineer - ᕕ( ᐛ )ᕗ"
     owner = "Chris Lee"
     keywords = ""
     copyright = ""
     menuMore = "show more"
     readMore = "read more"
     readOtherPosts = "read other posts"
-    newerPosts = "bewer posts"
+    newerPosts = "newer posts"
     olderPosts = "older posts"
     missingContentMessage = "page not found..."
     missingBackButtonLabel = "back to home page"
 
     [languages.en.params.logo]
-      logoText = "chris yx lee"
+      logoText = "chris yx lee ᕕ( ᐛ )ᕗ"
       logoHomeLink = "/"
 
     [languages.en.menu]
