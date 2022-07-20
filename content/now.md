@@ -1,12 +1,10 @@
-+++
-title = "now"
-date = "2022-06-08"
-+++
+---
+title: "now"
+date: "2022-07-19"
+---
 
 - working at a stealth startup
-- watching [Spy x Family](https://myanimelist.net/anime/50265/Spy_x_Family) and [Succession](https://www.imdb.com/title/tt7660850/)
-- playing [Astroneer](https://astroneer.space/) and [Katana Zero](https://store.steampowered.com/app/460950/Katana_ZERO/)
-- bouldering V4s (2x/week)
-- running 3 miles (2x/week)
-- occasionally jump roping and rowing
-
+- building a yacht in [Raft](https://store.steampowered.com/app/648800/Raft/)
+- playing [Pikuniku](https://store.steampowered.com/app/572890/Pikuniku/) and [Stray](https://store.steampowered.com/app/1332010/Stray/)
+- attempting to boulder V4s (2x/week) when I'm not injured
+- exploring SF by e-bike
