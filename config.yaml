@@ -1,98 +1,91 @@
-baseurl = "https://chrisyxlee.com/"
-languageCode = "en-us"
-theme = "terminal"
-paginate = 10
+baseurl : "https://chrisyxlee.com/"
+languageCode : "en-us"
+theme : "terminal"
+paginate : 10
 
-[params]
+params:
   # dir name of your main content (default is `content/posts`).
   # the list of set content will show up on your index page (baseurl).
-  contentTypeName = "posts"
+  ContentTypeName : "posts"
 
   # ["orange", "blue", "red", "green", "pink"]
-  themeColor = "pink"
+  ThemeColor : "pink"
 
   # if you set this to 0, only submenu trigger will be visible
-  showMenuItems = 8
+  ShowMenuItems : 8
 
   # show selector to switch language
-  showLanguageSelector = false
+  ShowLanguageSelector : false
 
   # set theme to full screen width
-  fullWidthTheme = false
+  FullWidthTheme : false
 
   # center theme with default width
-  centerTheme = true
+  CenterTheme : true
 
   # if your resource directory contains an image called `cover.(jpg|png|webp)`,
   # then the file will be used as a cover automatically.
   # With this option you don't have to put the `cover` param in a front-matter.
-  autoCover = true
+  AutoCover : true
 
   # set post to show the last updated
   # If you use git, you can set `enableGitInfo` to `true` and then post will automatically get the last updated
-  showLastUpdated = false
+  ShowLastUpdated : false
 
   # set a custom favicon (default is a `themeColor` square)
-  # favicon = "favicon.ico"
+  # favicon : "favicon.ico"
 
   # Provide a string as a prefix for the last update date. By default, it looks like this: 2020-xx-xx [Updated: 2020-xx-xx] :: Author
-  # updatedDatePrefix = "Updated"
+  # updatedDatePrefix : "Updated"
 
   # set all headings to their default size (depending on browser settings)
-  # oneHeadingSize = true # default
+  # oneHeadingSize : true # default
 
   # whether to show a page's estimated reading time
-  readingTime = false # default
+  ReadingTime : false # default
 
   # whether to show a table of contents
   # can be overridden in a page's front-matter
-  # Toc = false # default
+  # Toc : false # default
 
   # set title for the table of contents
   # can be overridden in a page's front-matter
-  # TocTitle = "Table of Contents" # default
+  # TocTitle : "Table of Contents" # default
 
+permalinks:
+  posts: /:year/:month/:title/
 
-[params.twitter]
-  # set Twitter handles for Twitter cards
-  # see https://developer.twitter.com/en/docs/tweets/optimize-with-cards/guides/getting-started#card-and-content-attribution
-  # do not include @
-  creator = "chrisyxlee"
-  site = "https://twitter.com/chrisyxlee"
+languages:
+  en:
+    languageName : "English"
+    title : "chris yx lee"
+    subtitle : "chris yx lee - software engineer - ᕕ( ᐛ )ᕗ"
+    owner : "Chris Lee"
+    keywords : ""
+    copyright : ""
+    menuMore : "show more"
+    readMore : "read more"
+    readOtherPosts : "read other posts"
+    newerPosts : "newer posts"
+    olderPosts : "older posts"
+    missingContentMessage : "page not found..."
+    missingBackButtonLabel : "back to home page"
 
-[languages]
-  [languages.en]
-    languageName = "English"
-    title = "chris yx lee"
-    subtitle = "chris yx lee - software engineer - ᕕ( ᐛ )ᕗ"
-    owner = "Chris Lee"
-    keywords = ""
-    copyright = ""
-    menuMore = "show more"
-    readMore = "read more"
-    readOtherPosts = "read other posts"
-    newerPosts = "newer posts"
-    olderPosts = "older posts"
-    missingContentMessage = "page not found..."
-    missingBackButtonLabel = "back to home page"
+    logo:
+      logoText : "chris yx lee ᕕ( ᐛ )ᕗ"
+      logoHomeLink : "/"
 
-    [languages.en.params.logo]
-      logoText = "chris yx lee ᕕ( ᐛ )ᕗ"
-      logoHomeLink = "/"
-
-    [languages.en.menu]
-      [[languages.en.menu.main]]
-        weight = 10
-        identifier = "blog"
-        name = "blog"
-        url = "/blog"
-      [[languages.en.menu.main]]
-        weight = 99
-        identifier = "about"
-        name = "about"
-        url = "/about"
-      [[languages.en.menu.main]]
-        weight = 100
-        identifier = "now"
-        name = "now"
-        url = "/now"
+    menu:
+      main:
+      - weight : 10
+        identifier : "blog"
+        name : "blog"
+        url : "/blog"
+      - weight : 99
+        identifier : "about"
+        name : "about"
+        url : "/about"
+      - weight : 100
+        identifier : "now"
+        name : "now"
+        url : "/now"
