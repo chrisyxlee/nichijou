@@ -1,10 +1,10 @@
 ---
 title: "now"
-date: "2022-07-19"
+date: "2022-12-07"
 ---
 
 - working at a stealth startup
-- building a yacht in [Raft](https://store.steampowered.com/app/648800/Raft/)
-- playing [Pikuniku](https://store.steampowered.com/app/572890/Pikuniku/) and [Stray](https://store.steampowered.com/app/1332010/Stray/)
-- attempting to boulder V4s (2x/week) when I'm not injured
+- watching [Chainsaw Man](https://myanimelist.net/anime/44511/Chainsaw_Man)
+- watching [Spy x Family](https://myanimelist.net/anime/50265/Spy_x_Family)
+- attempting to boulder V3s (2x/week) when I'm not injured
 - exploring SF by e-bike
