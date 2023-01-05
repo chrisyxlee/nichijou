@@ -1,0 +1,15 @@
+<div class="chat">
+  {{ $name := .Get "sender" }}
+  {{ $position := .Get "position" }}
+  <div class="chat-{{ $position }}">
+    <div class="chat-name"><b>{{ $name }}</b></div>
+    <div class="chat-inner">
+    {{ $inner := .Inner | markdownify }}
+    {{ $replaceFirstEnd:= replace $inner "</p>" "</span>" 1 }}
+    {{ $replaceFirstStart := replace $replaceFirstEnd "<p>" "<span>" 1 }}
+    {{ $replaceRestEnds := replace $replaceFirstStart "</p>" "</div>" -1 }}
+    {{ $replaceRestStarts := replace $replaceRestEnds "<p>" "<br /><div style=\"margin-top:6px\">" -1 }}
+    {{ $replaceRestStarts | safeHTML }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+.chat {
+  width: 80%;
+  margin: auto;
+}
+
+.chat-left {
+  border-left: 7px solid #b21cf2;
+  padding-left: 1.0rem;
+  padding-right: 1.0rem;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  background: #b21cf22b; 
+  text-align: left;
+}
+
+.chat-right {
+  border-left: 7px solid #882581b0;
+  padding-left: 1.0rem;
+  padding-right: 1.0rem;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  background: #88258130;
+  text-align: left;
+}
+
+.chat-name {
+  margin-bottom: 4px;
+}
+
+.chat-inner {
+  font-size: 90%;
+}
