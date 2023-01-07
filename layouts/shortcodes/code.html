@@ -1,17 +1,39 @@
 {{ $id := delimit (shuffle (seq 1 9)) "" }}
+{{ $inner := strings.TrimRight "\n" (strings.TrimLeft "\n" .Inner) }}
+{{ $connotation := (.Get "connotation") }}
+
+{{ $emoji_indicator := "" }}
+{{ $emoji_tooltip := "" }}
+{{ $bg_style := "" }}
+{{ if eq $connotation "good" }}
+  {{ $emoji_indicator = "🟢" }}
+  {{ $emoji_tooltip = "I ended up using this code snippet, so go ahead and copy." }}
+  {{ $bg_style = "#24613530" }}
+{{ else if eq $connotation "bad" }}
+  {{ $emoji_indicator = "❌"}}
+  {{ $emoji_tooltip = "This code snippet is illustrating my process and should NOT be copied."}}
+  {{ $bg_style = "#6b382930" }}
+{{ end }}
+
+{{ $options := "lineNos=inline" }}
+{{ if .Get "options" }}
+  {{ $options = (printf "%s,%s" $options (.Get "options")) }}
+{{ end }}
 
 {{ if .Get "language" }}
+  {{ $inner = transform.Highlight $inner ( .Get "language" ) $options }}
+  {{ $inner = strings.TrimPrefix `<div class="highlight">` (strings.TrimSuffix `</div>` $inner) }}
+  {{ if ne $bg_style "" }}
+    {{ $inner = replace $inner `<pre` (printf `<pre class="code-toolbar" style="background-color:%s !important;"` $bg_style) 1 }}
+  {{ end }}
   <div class="collapsable-code">
-    <input id="{{ .Get "id" | default $id }}" type="checkbox" {{ if ( eq ( .Get "isCollapsed" ) "true" ) -}} checked {{- end }} />
+    <input id="{{ .Get "id" | default $id }}" type="checkbox" {{ if ( eq ( .Get "isCollapsed" ) "true" ) }} checked {{end }} />
     <label for="{{ .Get "id" | default $id }}">
-      <span class="collapsable-code__language">{{ .Get "language" }}</span>
+      <span class="collapsable-code__language" {{ if ne $emoji_tooltip "" }}data-tooltip="{{ $emoji_tooltip }}" data-tooltip-position="bottom"{{ end }}>{{ if ne $emoji_indicator "" }}{{ $emoji_indicator }} {{ end }}{{ upper (.Get "language") }}</span>
       {{ if .Get "title" }}<span class="collapsable-code__title">{{ .Get "title" | markdownify }}</span>{{ end }}
       <span class="collapsable-code__toggle" data-label-expand="{{ .Get "expand" | default "△" }}" data-label-collapse="{{ .Get "collapse" | default "▽" }}"></span>
     </label>
-    <pre 
-      class="{{ if .Get "language" }}language-{{ .Get "language" }}{{ end }} {{ if ( eq ( .Get "line-numbers" ) "true" ) -}}line-numbers{{- end }}"
-      {{ if .Get "line-start" }}data-start="{{ .Get "line-start" | string }}" {{ else }}data-start="1"{{ end }}
-      ><code>{{ .Inner | string }}</code></pre>
+    {{ $inner | safeHTML }}
   </div>
 {{ else }}
   {{ errorf "If you want to use the \"collapsable code\" shortcode, you need to pass a mandatory \"language\" param. The issue occured in %q (%q)" .Page.File .Page.Permalink }}
