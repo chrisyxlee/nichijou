@@ -14,10 +14,8 @@
 </footer>
 
 {{ $menu := resources.Get "js/menu.js" | js.Build }}
-{{ $prism := resources.Get "js/prism.js" | js.Build }}
-{{ $lineNum := resources.Get "js/prism-line-numbers.js" | js.Build }}
 
-{{ $bundle := slice $menu $prism $lineNum | resources.Concat "bundle.js" | resources.Minify }}
+{{ $bundle := slice $menu | resources.Concat "bundle.js" | resources.Minify }}
 
 <script type="text/javascript" src="{{ $bundle.RelPermalink }}"></script>
 
