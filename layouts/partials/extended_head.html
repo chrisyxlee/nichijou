@@ -1,4 +1,4 @@
-{{ $files := slice "css/chat.css" }}
+{{ $files := slice "css/chat.css" "css/back_to_top.css" }}
 {{ range $files }}
   {{ $css := resources.Get . | minify }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
