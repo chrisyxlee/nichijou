@@ -1,0 +1,8 @@
+{{ if .Get "id" }}
+  {{ $id := .Get "id" }}
+  <div id="figure-{{ $id }}" align="{{ if .Get "align" }}{{ .Get "align" }}{{ else }}center{{ end }}">
+      <p style="font-size: small;"><b>Figure {{ $id }}.</b> <em>{{ .Inner | markdownify }}</em></p>
+  </div>
+{{ else }}
+  {{ errorf "named parameter `id` is required for figure shortcode."}}
+{{ end }}
