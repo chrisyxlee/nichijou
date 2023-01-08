@@ -1,2 +1,13 @@
 {{ $_hugo_config := `{ "version": 1 }` }}
-<div class="mermaid" align="{{ if .Get "align" }}{{ .Get "align" }}{{ else }}center{{ end }}">{{ safeHTML .Inner }}</div>
+{{ $id := delimit (shuffle (seq 1 9)) "" }}
+<div class="overlay-attached">
+    <div class="mermaid" align="{{ if .Get "align" }}{{ .Get "align" }}{{ else }}center{{ end }}">{{ safeHTML .Inner }}</div>
+    <button class="open-position" onclick='openOverlay("{{$id}}");'>
+        expand
+    </button>
+</div>
+<div id="{{$id}}" class="overlay">
+  <!-- Button to close the overlay navigation -->
+  <a href="javascript:void(0)" class="overlay-close" onclick='closeOverlay("{{$id}}");'>&times;</a>
+  <div class="mermaid overlay-content" align="{{ if .Get "align" }}{{ .Get "align" }}{{ else }}center{{ end }}">{{ safeHTML .Inner }}</div>
+</div>

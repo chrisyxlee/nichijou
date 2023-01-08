@@ -1,5 +1,5 @@
-{{ $files := slice "js/back_to_top.js" }} 
+{{ $files := slice "back_to_top.js" "overlay.js" }} 
 {{ range $files }}
-  {{ $resource := resources.Get . | js.Build | minify }}
-  <script type="text/javascript" src="{{ $resource.RelPermalink }}"></script>
+  {{ $resource := readFile (printf "%s/%s" "assets/js" .) }} 
+  <script type="text/javascript">{{ $resource | safeJS }}</script>
 {{ end }}

@@ -1,18 +1,26 @@
-let mybutton = document.getElementById("back-to-top");
+let toTopButton = document.getElementById("back-to-top");
 
-// When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function () {
-  scrollFunction();
+  maybeShowBackToTopButton();
 };
 
-function scrollFunction() {
+function maybeShowBackToTopButton() {
   var PIXELS_FROM_TOP = 100;
+
   if (
-    document.body.scrollTop > PIXELS_FROM_TOP ||
-    document.documentElement.scrollTop > PIXELS_FROM_TOP
+    (document.body.scrollTop > PIXELS_FROM_TOP ||
+      document.documentElement.scrollTop > PIXELS_FROM_TOP) &&
+    (document.body.style.overflow === undefined ||
+      document.body.style.overflow === "" ||
+      document.body.style.overflow === "scroll")
   ) {
-    mybutton.style.display = "block";
+    toTopButton.style.display = "block";
   } else {
-    mybutton.style.display = "none";
+    toTopButton.style.display = "none";
   }
+}
+
+function scrollToTop() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
