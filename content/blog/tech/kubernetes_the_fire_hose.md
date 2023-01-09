@@ -1,7 +1,7 @@
 ---
 title: kubernetes, the fire hose 
-date: 2022-12-07
-lastmod: 2023-01-08
+date: 2023-01-09
+lastmod: 2023-01-09
 mermaid: true
 toc: true
 readingtime: true
