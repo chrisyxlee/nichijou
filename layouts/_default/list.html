@@ -1,0 +1,21 @@
+{{ define "main" }}
+  {{ with .Content }}
+    <div class="index-content">
+      {{ . }}
+    </div>
+  {{ end }}
+  <div class="posts">
+    {{ range (where .Site.RegularPages "Type" "in" (slice "blog")).GroupByDate "2006" }}
+      <article class="on-list">
+			  <h1 class="post-title">{{ .Key }}</h1>
+        <ul>
+          {{ range .Pages }}
+          <li>
+            <p>{{ .Date.Format "Jan 2" }} | <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></p>
+          </li>
+          {{- end -}}
+        </ul>
+			</article>
+    {{ end }}
+  </div>
+{{ end }}
