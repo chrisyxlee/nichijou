@@ -1,6 +1,7 @@
 ---
 title: piano covers on youtube
 date: 2022-06-11
+lastmod: 2023-05-04
 aliases:
   - /sheet_music
 tags:
@@ -11,6 +12,7 @@ tags:
 showFullContent: false
 readingTime: false
 hideComments: true
+summary: I used to play piano. This is a summary of why I don't play piano anymore and serves as an archive for the sheets I used to transcribe back in the day.
 ---
 
 Sheets at the bottom.

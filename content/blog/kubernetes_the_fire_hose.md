@@ -1,7 +1,7 @@
 ---
-title: kubernetes, the fire hose 
+title: kubernetes, the fire hose
 date: 2023-01-09
-lastmod: 2023-01-09
+lastmod: 2023-05-04
 mermaid: true
 toc: true
 readingtime: true
@@ -39,7 +39,7 @@ These requirements implied that I would need networking and [TLS](https://www.cl
 On top of that, I needed to get this up and running fast -- I only had about 2 or 3 weeks.
 
 > **NOTE**
-> One might ask whether it's a premature optimization to go from nothing to Kubernetes. Perhaps. In this case, I mostly knew what I was getting into (suffering), and I needed to use/learn this at one point or another anyways. I could have bootstrapped our services much quicker had I used Google Cloud Run or Amazon Fargate, but Kubernetes was always an objective. 
+> One might ask whether it's a premature optimization to go from nothing to Kubernetes. Perhaps. In this case, I mostly knew what I was getting into (suffering), and I needed to use/learn this at one point or another anyways. I could have bootstrapped our services much quicker had I used Google Cloud Run or Amazon Fargate, but Kubernetes was always an objective.
 
 ## my background
 
@@ -51,9 +51,9 @@ I went into this learning process blind.
 
 My resources were mostly documentation and tutorials that I could search for online. However, there were some situations that no matter how hard I tried, I couldn't figure out what piece I was missing. Enter [Wilson Husin](https://husin.dev).
 
-The alternate title for this post is "Simping for Wilson". 
+The alternate title for this post is "Simping for Wilson".
 
-In addition to being my favorite person, Wilson also has prior expertise with both the intricacies of Kubernetes (Pivotal and VMware) and deploying apps to clusters (from side projects). Whenever I ran into an issue that I didn't know how to Google, Wilson was always there to point me in the right direction.  
+In addition to being my favorite person, Wilson also has prior expertise with both the intricacies of Kubernetes (Pivotal and VMware) and deploying apps to clusters (from side projects). Whenever I ran into an issue that I didn't know how to Google, Wilson was always there to point me in the right direction.
 
 ## my final setup
 
@@ -72,7 +72,7 @@ flowchart TB
   %% Formatting
   EKS --> GCS
   linkStyle 0 display:none;
-  
+
   %% Edges
   Ko -->|builds| Main
   Ko -->|uploads| ArtifactRegistry
@@ -88,12 +88,12 @@ flowchart TB
   subgraph AWS[Amazon Web Services]
     EKS
   end
-  
+
   subgraph Machine[My Machine]
     Secrets
     Ko
     Terraform
-    
+
     subgraph Repo[The Repository]
       YAML
       Main
@@ -119,14 +119,14 @@ flowchart TB
   OtherPod[other-pod]
 
   %% Formatting
-  
+
   %% Edges
   MyService -->|manages| MyDeployment -->|manages| MyReplicaSet -->|manages| MyPod
   Knative -->|manages|MyService
   YAML -->|deployed with <code>kubectl</code>| MyService
   MyPod -->|pulls image| ArtifactRegistry
 
-  %% Subgraphs %%  
+  %% Subgraphs %%
   subgraph GCP[Google Cloud Platform]
     ArtifactRegistry
   end
@@ -145,7 +145,7 @@ flowchart TB
         subgraph Node2[Node 2]
           OtherPod
         end
-      end 
+      end
 
       subgraph Knative[Knative Serving]
         Kourier
@@ -159,7 +159,7 @@ flowchart TB
 {{</mermaid>}}
 
 {{<figure id="2">}}
-Once the resources are created, this is how the services are deployed. Of course, Kourier is also a pod that is running on one of the nodes, but here we're looking at it as a logical abstraction. 
+Once the resources are created, this is how the services are deployed. Of course, Kourier is also a pod that is running on one of the nodes, but here we're looking at it as a logical abstraction.
 {{</figure>}}
 
 {{<mermaid>}}
@@ -172,13 +172,13 @@ flowchart TB
   Service[my-service<br>GraphQL service]
 
   %% Formatting
-  
+
   %% Edges
   DNS -->|wildcard record to| Kourier
   DNS -->|CNAME record to| Vercel
   Knative -->|manages| Service
 
-  %% Subgraphs %%  
+  %% Subgraphs %%
   subgraph GCP[Google Cloud Platform]
     DNS
   end
@@ -201,11 +201,11 @@ How our DNS is configured.
 
 When faced with a challenge that one has no experience with, where does one begin?
 
-The following sections are in logical order, not chronological order. Sometimes I was tackling three different problems all at once, but for the sake of clarity, I've separated each issue to make it easier to understand the nuances of each task. 
+The following sections are in logical order, not chronological order. Sometimes I was tackling three different problems all at once, but for the sake of clarity, I've separated each issue to make it easier to understand the nuances of each task.
 
 ### managing images with `ko` and Vercel
 
-The first part of running code in a generic environment is actually packaging that code up so that it can run somewhere. Our previous method was to compile the binary to Linux through and transfer that file over to the relevant VM through secure copying (`scp`).
+The first part of running code in a generic environment is actually packaging that code up so that it can run somewhere. Our previous method was to compile the binary to Linux and transfer that file over to the relevant VM through secure copying (`scp`).
 
 {{<code language="bash" connotation="neutral" title="Using `go` to build a binary">}}
 env GOOS=linux GOARCH=amd64 go build -v -o bin/service_lx path/to/service/main.go
@@ -219,7 +219,7 @@ This is what the Dockerfile looked at the smallest I could get it, but I had var
 # syntax=docker/dockerfile:1
 
 # Use the base Linux-based distro so that we have access to bash.
-FROM alpine 
+FROM alpine
 
 # Copy the compiled binary.
 COPY ./bin/service_lx /go/bin/service
@@ -263,7 +263,7 @@ If you're already separating your app between frontend and backend, then it's wo
 Oh snap.
 {{</chat>}}
 
-Both of these services ended up working within 5 minutes of granting permissions to our repository in GitHub. Moral of the story: pay someone to do it faster. 
+Both of these services ended up working within 5 minutes of granting permissions to our repository in GitHub. Moral of the story: pay someone to do it faster.
 
 I ended up going with Vercel over Netlify though since Netlify only allowed 1 email to be associated with 1 GitHub user, and... I mean I do need to host this site too.
 
@@ -287,7 +287,7 @@ As our next step, I decided to move us to Google [Kubernetes Engine](https://clo
 1. Lingering costs when I forgot to delete something if I decided to make a new cluster
 2. Lack of repeatability since I easily forgot to run a step without perfect documentation and execution
 3. Mind-numbing boredom while manually waiting for each step to complete
-4. Someone else could be run something that conflicts with changes I'm making
+4. Someone else could be running something that conflicts with changes I'm making
 5. Do I have to do this again if I want a prod and a dev cluster?
 
 During a vent session with Wilson, he strongly suggested using something like [Terraform](https://terraform.io/) (IaC tool) to do all these commands programmatically. I recall being irrationally stubborn for a bit since I had the notion that Terraform would abstract everything away automagically and I wanted to learn how to run the commands myself. Turns out, the configs you set up in Terraform are essentialy a 1-to-1 mapping back to the configs you'd have to manually put in. My bullheadedness didn't last long though, thankfully.
@@ -355,11 +355,11 @@ resource "google_container_node_pool" "default" {
 }
 {{</code>}}
 
-All of my problems were solved. 
+All of my problems were solved.
 
-1. Costs - Terraform owns these resources, so if you remove it, poof, it's gone! 
+1. Costs - Terraform owns these resources, so if you remove it, poof, it's gone!
 2. Repeatability - It's all code, baby.
-3. Boredom - Terraform runs all the steps, so I can go do something else. 
+3. Boredom - Terraform runs all the steps, so I can go do something else.
 4. Conflicts - Our remote backend in GCS is the mutex for applying updates.
 5. Multiple clusters - [Workspaces](https://developer.hashicorp.com/terraform/language/state/workspaces) unlocked variable management for dev vs. prod.
 
@@ -427,16 +427,16 @@ sequenceDiagram
   participant Kourier as Kourier<br>backend.example.com<br>Cluster<br>external endpoint
   participant Service as Service<br>service.backend.example.com<br>Publicly accessible<br>service in cluster
   User->>+DNS: I want frontend.example.com
-  DNS->>-User: here ya go 
+  DNS->>-User: here ya go
   User->>+Vercel: Give me your site
   Vercel->>-User: okie dokie
-  User->>+DNS: Site from Vercel:<br>I need service.backend.example.com 
-  DNS->>-User: here ya go 
-  User->>Kourier: Give me data 
+  User->>+DNS: Site from Vercel:<br>I need service.backend.example.com
+  DNS->>-User: here ya go
+  User->>Kourier: Give me data
   activate Kourier
   Kourier->>+Service: Hey someone's asking for you
   deactivate Kourier
-  Service->>-User: okie dokie 
+  Service->>-User: okie dokie
 {{</mermaid>}}
 
 {{<figure id="4">}}
@@ -447,7 +447,7 @@ Despite the hand holding, I made some _YIKES_ mistakes along the way.
 
 #### 😱 LetsEncrypt can rate-limit you
 
-[LetsEncrypt](https://letsencrypt.org/) is a nonprofit Certificate Authority providing [TLS](https://www.cloudflare.com/learning/ssl/transport-layer-security-tls/) Certificates. Knative auto-TLS works by specifying a TLS issuer (in my case, LetsEncrypt) where Knative Serving will automatically send certificate requests to the issuer for each managed service so that users know they can trust the endpoint when they query it. 
+[LetsEncrypt](https://letsencrypt.org/) is a nonprofit Certificate Authority providing [TLS](https://www.cloudflare.com/learning/ssl/transport-layer-security-tls/) Certificates. Knative auto-TLS works by specifying a TLS issuer (in my case, LetsEncrypt) where Knative Serving will automatically send certificate requests to the issuer for each managed service so that users know they can trust the endpoint when they query it.
 
 What I didn't know was... if you get the request wrong enough times, LetsEncrypt [rate limits](https://letsencrypt.org/docs/rate-limits/) you by domain and IP address. That's why LetsEncrypt provides a [staging environment](https://letsencrypt.org/docs/staging-environment/) with a higher rate limit for testing. But since I blindly followed the auto-TLS tutorial which used the prod environment, I was essentially testing against the prod environment. 🙃
 
@@ -463,11 +463,11 @@ Even worse, we needed the site to be up and running for a meeting, and the rate 
 
 Fortunately, we had a backup domain name that we were going to use for our dev cluster. At this point, we didn't have a dev cluster yet, so using a different domain worked at the very least. For the original domain name, I ended up waiting a week for the rate limit to run out before trying again **with the staging environment**.
 
-#### packaged installs > loose YAMLs 
+#### packaged installs > loose YAMLs
 
-My initial installation of Knative involved downloading the Knative Serving, networking, and Cert Manager files manually and applying them all (literally `curl` and then `kubectl apply -f`). However, with this method of installation, [upgrading Knative](https://knative.dev/docs/install/upgrade/upgrade-installation/) versions proved difficult as they need to be incremented 1 at a time, and I needed to make sure I was applying the correct YAMLs in the right order. 
+My initial installation of Knative involved downloading the Knative Serving, networking, and Cert Manager files manually and applying them all (literally `curl` and then `kubectl apply -f`). However, with this method of installation, [upgrading Knative](https://knative.dev/docs/install/upgrade/upgrade-installation/) versions proved difficult as they need to be incremented 1 at a time, and I needed to make sure I was applying the correct YAMLs in the right order.
 
-* [Knative Operator](https://knative.dev/docs/install/operator/knative-with-operators/) handles creating the Knative YAMLs. 
+* [Knative Operator](https://knative.dev/docs/install/operator/knative-with-operators/) handles creating the Knative YAMLs.
 * Cert Manager [Helm repository](https://cert-manager.io/docs/installation/helm/#installing-with-helm) was easier to manage.
 
 > [Helm charts](https://helm.sh/) are packaged Kubernetes applications. I've found these *especially* helpful for deploying third-party applications into our clusters.
@@ -486,9 +486,9 @@ Welcome to suffering.
 
 First, I dove into [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) (GKE) but ultimately migrated over to [Amazon Elastic Kubernetes Service](https://aws.amazon.com/eks/) (EKS). Why? Money. Was this a mistake? ¯\\\_(ツ)\_/¯
 
-Picture this: 
+Picture this:
 
-I've just migrated from GKE to EKS. On GKE, our nodes were doing fine as far as I could tell. As soon as I move over to EKS, nodes are transitioning into the `NotReady` state all the time. 😱 OK, so I figure out that you can manually delete the bad nodes (`kubectl delete node <insert node name>`). BUT, AWS doesn't automatically give you another node to top you up. So, then I had to re-apply Terraform settings with increased `desired_size` to get my node back... and this was happening multiple times a week. 
+I've just migrated from GKE to EKS. On GKE, our nodes were doing fine as far as I could tell. As soon as I move over to EKS, nodes are transitioning into the `NotReady` state all the time. 😱 OK, so I figure out that you can manually delete the bad nodes (`kubectl delete node <insert node name>`). BUT, AWS doesn't automatically give you another node to top you up. So, then I had to re-apply Terraform settings with increased `desired_size` to get my node back... and this was happening multiple times a week.
 
 I did't have SSH access into the node instances themselves, so whatever is causing the nodes to stop reporting their status is a mystery to me. And then I read Alexander Potasnick's [comparison](https://acloudguru.com/blog/engineering/aks-vs-eks-vs-gke-managed-kubernetes-services-compared) between different managed Kubernetes services and see that "[EKS has] no automatic node health repair".[^1]
 
@@ -525,11 +525,11 @@ MAX_PODS= # Determined by your machine size (see preset limits below)
 ps aux | grep kubelet
 {{</code>}}
 
-With access to the nodes though, this meant we could attempt to modify how the Kubelet was run. We started by first manually changing the Kubelet extra args. This meant SSH-ing into the node, then re-running the [EKS bootstrap script](https://github.com/awslabs/amazon-eks-ami/blob/master/files/bootstrap.sh). I ran into a few snags with the script not recognizing `CLUSTER_NAME` even though I set it last positionally, but setting it first seemed to work. 
+With access to the nodes though, this meant we could attempt to modify how the Kubelet was run. We started by first manually changing the Kubelet extra args. This meant SSH-ing into the node, then re-running the [EKS bootstrap script](https://github.com/awslabs/amazon-eks-ami/blob/master/files/bootstrap.sh). I ran into a few snags with the script not recognizing `CLUSTER_NAME` even though I set it last positionally, but setting it first seemed to work.
 
-> Fun fact: Amazon EKS has [preset limits](https://github.com/aws/amazon-vpc-resource-controller-k8s/blob/7b8ae36fe5cd3f2cb6a16b9585cbe905c52cd34c/pkg/aws/vpc/limits.go#L278) for how many pods can run on each type of machine. I later realized that this preset limit is due to the number of IPs assigned to each machine, but my first instinct was to change the number of allowed pods on a node. 
+> Fun fact: Amazon EKS has [preset limits](https://github.com/aws/amazon-vpc-resource-controller-k8s/blob/7b8ae36fe5cd3f2cb6a16b9585cbe905c52cd34c/pkg/aws/vpc/limits.go#L278) for how many pods can run on each type of machine. I later realized that this preset limit is due to the number of IPs assigned to each machine, but my first instinct was to change the number of allowed pods on a node.
 
-This was a great temporary solution. Our production environment ran smoothly for over a month. However, since we were making changes to our dev environment, dev was still breaking every so often. And since restarting Kubelet was a manual process, if someone forgot to run the command, the nodes were going to die anyways. 
+This was a great temporary solution. Our production environment ran smoothly for over a month. However, since we were making changes to our dev environment, dev was still breaking every so often. And since restarting Kubelet was a manual process, if someone forgot to run the command, the nodes were going to die anyways.
 
 {{<rawhtml>}}
 <center>
@@ -572,7 +572,7 @@ My debugging process was basically:
 2. SSH into any node (`kubectl get node`)
 3. Check `ps aux | grep kubelet` to see if my extra args were in
 4. Check `journalctl -u kubelet`
-5. Add more debug files 
+5. Add more debug files
 6. Rinse and repeat 😭
 
 By the end of this process, I narrowed down the problem but didn't know how to solve it.
@@ -604,7 +604,7 @@ EOF
 fi
 {{</code>}}
 
-{{<chat sender="me" position="right">}}The problem though is that the `/etc/systemd/system/kubelet.service.d/30-kubelet-extra-args.conf` file exists already, and it has something else in it. 
+{{<chat sender="me" position="right">}}The problem though is that the `/etc/systemd/system/kubelet.service.d/30-kubelet-extra-args.conf` file exists already, and it has something else in it.
 
 So, I'm going to guess that even if I do write my own args to that file, EKS is going to overwrite it again based on that script snippet.
 {{</chat>}}
@@ -617,7 +617,7 @@ Yes, name your file 31.
 🤯 omg, 30 has no meaning...
 {{</chat>}}
 
-Well, it's not that 30 has no meaning, but more that the file doesn't have to be named 30. In fact, what I learned was that `systemd` makes sure that particular programs are running with tht correct configurations. More specifically, those configurations have a certain precedence. And when Wilson said to "name [my] file 31," he was referring to the `systemd` documentation that states, "for options which accept just a single value, the entry in the file sorted last takes precedence."[^2] 
+Well, it's not that 30 has no meaning, but more that the file doesn't have to be named 30. In fact, what I learned was that `systemd` makes sure that particular programs are running with tht correct configurations. More specifically, those configurations have a certain precedence. And when Wilson said to "name [my] file 31," he was referring to the `systemd` documentation that states, "for options which accept just a single value, the entry in the file sorted last takes precedence."[^2]
 
 Armed with that knowledge, my launch template just required a few more tweaks for my `userdata.tpl` file (passed through Terraform). Why do 31 when I can bump it straight up to 99?
 
@@ -661,11 +661,11 @@ Also hindsight is 20/20, but I realize now that if I had just searched up what `
 Now that I've gone through this ordeal, here's how I understand Kubernetes with an emphasis on what's important to me:
 
 * [Nodes](https://kubernetes.io/docs/concepts/architecture/nodes/) are machines (physical or virtual) with hard limits on resources.
-* [Kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/) runs on the machine and registers the machine (=node) with the cluster. 
+* [Kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/) runs on the machine and registers the machine (=node) with the cluster.
 * [Pods](https://kubernetes.io/docs/concepts/workloads/pods/) are the smallest abstraction in Kubernetes. Pods run containers that use up machine resources.
 * [Services](https://kubernetes.io/docs/concepts/services-networking/service/) are a logical resource that allow discoverability of pods.
-* [Ingresses](https://kubernetes.io/docs/concepts/services-networking/ingress/) are rules to make internal endpoints externally reachable. 
-* Deployments, replicasets, daemonsets, batchjobs, jobs, etc. are resources that manage pod lifecycles (e.g. how many, when, where, what happens on restarts or crashing) 
+* [Ingresses](https://kubernetes.io/docs/concepts/services-networking/ingress/) are rules to make internal endpoints externally reachable.
+* Deployments, replicasets, daemonsets, batchjobs, jobs, etc. are resources that manage pod lifecycles (e.g. how many, when, where, what happens on restarts or crashing)
 * You can make custom resources (like Knative does).
 
 And the Cloud Native Computing Foundation (CNCF) provides [The Illustrated Children's Guide to Kubernetes](https://www.cncf.io/phippy/the-childrens-illustrated-guide-to-kubernetes/).
@@ -674,7 +674,7 @@ And the Cloud Native Computing Foundation (CNCF) provides [The Illustrated Child
 
 A big thank you to [Wilson Husin](https://github.com/wilsonehusin) for teaching me about Kubernetes and everything needed to get an end-to-end site up and running. Thank you for bearing with all the smooth-brained and frustrating conversations with me. 🙏
 
-Thank you for proofreading my post and providing feedback! 
+Thank you for proofreading my post and providing feedback!
 * [Sam Farid](https://github.com/holosam)
 * [Wilson Husin](https://github.com/wilsonehusin)
 * [Roger Lee](https://github.com/rogerjxlee)
