@@ -1,5 +1,23 @@
+body {
+  overflow: overlay;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(211, 211, 211, 0.4);
+  border-radius: 2px;
+}
+
+:hover::-webkit-scrollbar-thumb {
+  background: rgb(220, 220, 220, 0.6);
+}
+
 .chat {
-  width: 80%;
+  width: 85%;
   margin: auto;
 }
 
@@ -9,9 +27,9 @@
   padding-right: 1.0rem;
   padding-top: 6px;
   padding-bottom: 6px;
-  margin-top: 1px;
-  margin-bottom: 1px;
-  background: #b21cf22b; 
+  margin-top: 3px;
+  margin-bottom: 3px;
+  background: #b21cf22b;
   text-align: left;
 }
 
@@ -21,8 +39,8 @@
   padding-right: 1.0rem;
   padding-top: 6px;
   padding-bottom: 6px;
-  margin-top: 1px;
-  margin-bottom: 1px;
+  margin-top: 3px;
+  margin-bottom: 3px;
   background: #88258130;
   text-align: left;
 }
