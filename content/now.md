@@ -1,10 +1,10 @@
 ---
 title: "now"
-date: "2022-12-07"
+date: "2023-06-01"
 ---
 
 - working at a stealth startup
-- watching [Chainsaw Man](https://myanimelist.net/anime/44511/Chainsaw_Man)
-- watching [Spy x Family](https://myanimelist.net/anime/50265/Spy_x_Family)
+- hopelessly addicted to [Tears of the Kingdom](https://www.nintendo.com/store/products/the-legend-of-zelda-tears-of-the-kingdom-switch/)
+- just finished [Campfire Cooking in Another World with My Absurd Skill](https://www.crunchyroll.com/series/GG5H5X3EE/campfire-cooking-in-another-world-with-my-absurd-skill) (highly recommend)
 - attempting to boulder V3s (2x/week) when I'm not injured
-- exploring SF by e-bike
+- e-bike life
