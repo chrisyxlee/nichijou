@@ -1,0 +1,37 @@
+{{ define "main" }}
+	{{ with .Content }}
+	  <div class="index-contents">
+		  {{ . }}
+		</div>
+	{{ end }}
+
+  <div class="posts">
+    <h1 class="post-title">{{ .Title }}</h1>
+    {{ range sort .Site.Taxonomies.tags }}
+      {{ $c := substr .Page.Title 0 1 | upper }}
+      {{ $savedChar := $.Scratch.Get "savedChar" }}
+
+      {{ if ne $c $savedChar }}
+        {{ if ne $savedChar "" }}
+          </ul>
+          </article>
+        {{ end }}
+
+        {{ $.Scratch.Set "savedChar" $c }}
+        {{ $.Scratch.Set "nonEmpty" "true" }}
+
+        <h2>{{ $c }}</h2>
+        <article class="on-list">
+        <ul>
+      {{ end }}
+
+      <li>
+        <a href="{{ .Page.Permalink }}">{{ .Page.Title }} ({{ .Count }})</a>
+      </li>
+    {{- end -}}
+    {{ if eq ($.Scratch.Get "nonEmpty") "true" }}
+      </ul>
+      </article>
+    {{ end }}
+  </div>
+{{ end }}
