@@ -4,15 +4,33 @@
       {{ . }}
     </div>
   {{ end }}
+
+  {{ $tag := "" }}
+	{{ if hasPrefix .RelPermalink "/tags/" }}
+  	{{ $tag = strings.TrimSuffix "/" (strings.TrimPrefix "/tags/" .RelPermalink) }}
+		<div class="index-content">
+			{{ printf "listing posts with tag `%s`. see all [tags](/tags)." $tag | markdownify }}
+		</div>
+	{{ end }}
+
   <div class="posts">
     {{ range (where .Site.RegularPages "Type" "in" (slice "blog")).GroupByDate "2006" }}
+			{{ if ne $tag "" }}
+  		  {{ if eq (len (where .Pages "Params.tags" "intersect" (slice $tag))) 0 }}
+  				{{ continue }}
+  			{{ end }}
+			{{ end }}
+
       <article class="on-list">
 			  <h1 class="post-title">{{ .Key }}</h1>
         <ul>
           {{ range .Pages }}
-          <li>
-            <p>{{ .Date.Format "Jan 2" }} | <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></p>
-          </li>
+		        {{ if and (ne $tag "") (not (in .Params.tags $tag)) }}
+			      	{{ continue }}
+			      {{ end }}
+            <li>
+              <p>{{ .Date.Format "Jan 2" }} | <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></p>
+            </li>
           {{- end -}}
         </ul>
 			</article>
