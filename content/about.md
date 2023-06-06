@@ -11,4 +11,4 @@ I'm chris!
 
 ## links
 
-[`email`](mailto:chris.yx.lee@gmail.com) | [`github`](https://www.github.com/chrisyxlee) | [`linkedin`](https://www.linkedin.com/in/chrisyxlee) | [`twitter`](https://www.twitter.com/chrisyxlee) | [`resume`](/chrisyxlee_resume.pdf)
+[`email`](mailto:chris.yx.lee@gmail.com) | [`github`](https://www.github.com/chrisyxlee) | [`linkedin`](https://www.linkedin.com/in/chrisyxlee) | [`mastodon`](https://hachyderm.io/@chrisyxlee) | [`twitter`](https://www.twitter.com/chrisyxlee) | [`resume`](/chrisyxlee_resume.pdf)

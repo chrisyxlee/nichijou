@@ -21,6 +21,7 @@
 {{ $bundle := slice $menu | resources.Concat "bundle.js" | resources.Minify }}
 
 <script type="text/javascript" src="{{ $bundle.RelPermalink }}"></script>
+<a rel="me" href="https://hachyderm.io/@chrisyxlee" style="visibility: hidden;">Mastodon</a>
 
 {{ if $.Site.Params.showLanguageSelector }}
   <script src="{{ "assets/languageSelector.js" | absURL }}"></script>
