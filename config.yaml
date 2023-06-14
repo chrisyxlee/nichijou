@@ -57,23 +57,24 @@ permalinks:
 
 languages:
   en:
-    languageName: "English"
-    title: "chris yx lee"
-    subtitle: "chris yx lee - software engineer - ᕕ( ᐛ )ᕗ"
-    owner: "Chris Lee"
-    keywords: ""
-    copyright: ""
-    menuMore: "show more"
-    readMore: "read more"
-    readOtherPosts: "read other posts"
-    newerPosts: "newer posts"
-    olderPosts: "older posts"
-    missingContentMessage: "page not found..."
-    missingBackButtonLabel: "back to home page"
+    params:
+      languageName: "English"
+      title: "chris yx lee"
+      subtitle: "chris yx lee - software engineer - ᕕ( ᐛ )ᕗ"
+      owner: "Chris Lee"
+      keywords: ""
+      copyright: ""
+      menuMore: "show more"
+      readMore: "read more"
+      readOtherPosts: "read other posts"
+      newerPosts: "newer posts"
+      olderPosts: "older posts"
+      missingContentMessage: "page not found..."
+      missingBackButtonLabel: "back to home page"
 
-    logo:
-      logoText: "chris yx lee ᕕ( ᐛ )ᕗ"
-      logoHomeLink: "/"
+      logo:
+        logoText: "chris yx lee ᕕ( ᐛ )ᕗ"
+        logoHomeLink: "/"
 
     menu:
       main:
