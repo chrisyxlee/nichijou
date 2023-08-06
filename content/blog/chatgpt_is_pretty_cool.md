@@ -1,7 +1,7 @@
 ---
 title: chatgpt is pretty cool
 date: 2023-06-01
-modtime: 2023-08-06
+lastmod: 2023-08-06
 mermaid: true
 readingtime: true
 toc: true
