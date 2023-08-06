@@ -1,6 +1,7 @@
 ---
 title: chatgpt is pretty cool
 date: 2023-06-01
+modtime: 2023-08-06
 mermaid: true
 readingtime: true
 toc: true
@@ -31,7 +32,7 @@ Enter ChatGPT (3.5)!
 > **ASIDE**\
 > I made the mistake of writing a prompt that was too generic (forgot the `in postgresql` part) the first time, but it's nice you can continue to finetune it.
 
-{{<chat recipient="ChatGPT">}}
+{{<chat recipient="GPT-3.5" permalink="https://chat.openai.com/">}}
 %right%
 write plsql in postgresql to raise a notice about how many rows and which rows were updated
 
@@ -114,7 +115,7 @@ This code snippet ended up working for me straight out of the box after I replac
 
 I started writing Prometheus queries and wasn't familiar with the syntax. The general concept of vectors made sense to me, but I was having a hard time wrapping my head around the one-to-many matchings for the binary operators. Specifically, I wanted to combine two instant vectors where one vector had 1 more label than the other, but I wanted to join on other labels and keep the additional label at the end. This sent me down a rabbit hole of trying to modify the vector labels.
 
-{{<chat recipient="ChatGPT">}}
+{{<chat recipient="GPT-3.5" permalink="https://chat.openai.com/">}}
 %right%
 filter out labels from a prometheus timeseries
 
@@ -142,7 +143,7 @@ By applying the `drop` function with the desired labels, you can filter out spec
 
 ⛔️ um what? This `drop` function doesn't exist anywhere within Prometheus's documentation on [functions](https://prometheus.io/docs/prometheus/latest/querying/functions/).
 
-{{<chat recipient="ChatGPT">}}
+{{<chat recipient="GPT-3.5" permalink="https://chat.openai.com/">}}
 %right%
 is there a function that's the opposite of drop
 

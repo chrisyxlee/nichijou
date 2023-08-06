@@ -3,17 +3,38 @@
 }
 
 .chat-recipient {
-  background-color: #2d2d2d;
+  background-color: #817dab;
   padding-top: 12px;
-  padding-bottom: 4px;
+  padding-bottom: 12px;
   padding-left: 28px;
   padding-right: 28px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.chat-recipient img {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  margin-right: 12px;
+}
+
+.chat-recipient div {
+  display: inline-block;
+  align-self: center;
+}
+
+.chat-recipient svg {
+  margin-left: 12px;
+  width: 16px;
+  height: 16px;
 }
 
 .chat-body {
-  background-color: #182825;
+  background-color: #211e45;
   padding-top: 4px;
   padding-bottom: 12px;
   padding-left: 28px;
@@ -51,11 +72,11 @@
 }
 
 .chat-message-left {
-  background-color: #227c9d;
+  background-color: #393478;
 }
 
 .chat-message-right {
-  background-color: #22aed1;
+  background-color: #646185;
 }
 
 /* The tail of the chat bubble, which is an absolutely positioned triangle relative
@@ -68,15 +89,15 @@
 
 .chat-message-tail-right {
   right: -16px;
-  border-left: 16px solid #22aed1;
+  border-left: 16px solid #646185;
   border-right: 16px solid transparent;
-  border-bottom: 14px solid #22aed1;
+  border-bottom: 14px solid #646185;
   border-top: 14px solid transparent;
 }
 
 .chat-message-tail-left {
   left: -16px;
   border-left: 16px solid transparent;
-  border-right: 16px solid #227c9d;
-  border-bottom: 14px solid #227c9d;
+  border-right: 16px solid #393478;
+  border-bottom: 14px solid #393478;
 }

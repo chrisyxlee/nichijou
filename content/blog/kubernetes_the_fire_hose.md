@@ -249,7 +249,7 @@ The Go image size comparisons are here:
 
 That still left the front end. I thought, well the Go microservices worked out, so let's try to write a Dockerfile for NextJS as well (spoiler alert: a terrible idea). Lots of guides said it was possible, and so we tried. To make a long and bitter story short, my coworker and I tried all sorts of variations. Our results were either a 2GB+ image or a >100MB image that didn't even work and took >10 minutes to build. Also at the time, Comcast was capping our monthly usage to 1TB (then you pay extra), so uploading a huge image wouldn't bode well for my internet costs... 💀 So I vented to Wilson.
 
-{{<chat recipient="Wilson">}}
+{{<chat recipient="Wilson" avatar="https://avatars.githubusercontent.com/u/14004487" permalink="https://husin.dev/">}}
 %right%
 I'm trying to deploy a NextJS app, but building takes 648 seconds 😭 And it's 120 MB.
 
@@ -584,7 +584,7 @@ COOL. I had no idea what was going on, and so I took my findings to Wilson. I do
 
 And off I went on this journey to look into `systemd`. Helpfully, he sent me a [video](https://youtu.be/UQXIdOb4Mzk), but I did not absorb anything, so he dutifully served as my sentient rubber duck.
 
-{{<chat recipient="Wilson">}}
+{{<chat recipient="Wilson" avatar="https://avatars.githubusercontent.com/u/14004487" permalink="https://husin.dev/">}}
 %right%
 I tried running `systemctl stop kubelet`, and it got restarted even faster this time. :(
 
@@ -603,7 +603,7 @@ EOF
 fi
 {{</code>}}
 
-{{<chat recipient="Wilson">}}
+{{<chat recipient="Wilson" avatar="https://avatars.githubusercontent.com/u/14004487" permalink="https://husin.dev/">}}
 %right%
 The problem though is that the `/etc/systemd/system/kubelet.service.d/30-kubelet-extra-args.conf` file exists already, and it has something else in it.
 
