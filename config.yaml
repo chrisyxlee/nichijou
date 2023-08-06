@@ -95,3 +95,6 @@ markup:
   tableOfContents:
     endLevel: 5
     ordered: true
+  goldmark:
+    renderer:
+      unsafe: true

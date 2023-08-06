@@ -249,18 +249,10 @@ The Go image size comparisons are here:
 
 That still left the front end. I thought, well the Go microservices worked out, so let's try to write a Dockerfile for NextJS as well (spoiler alert: a terrible idea). Lots of guides said it was possible, and so we tried. To make a long and bitter story short, my coworker and I tried all sorts of variations. Our results were either a 2GB+ image or a >100MB image that didn't even work and took >10 minutes to build. Also at the time, Comcast was capping our monthly usage to 1TB (then you pay extra), so uploading a huge image wouldn't bode well for my internet costs... 💀 So I vented to Wilson.
 
-{{<chat sender="me" position="right">}}
-I'm trying to deploy a NextJS app, but building takes 648 seconds 😭 And it's 120 MB.
-{{</chat>}}
-
-{{<chat sender="Wilson" position="left">}}
-Javscript environments are difficult, which is why Vercel and Netlify (public deploys) do so well. Try using [buildpacks.io](https://buildpacks.io/) and see if it's any better.
-
-If you're already separating your app between frontend and backend, then it's worth considering a stateless frontend that can be deployed publicly. Potentially even on edge too.
-{{</chat>}}
-
-{{<chat sender="me" position="right">}}
-Oh snap.
+{{<chat recipient="Wilson">}}
+right,I'm trying to deploy a NextJS app, but building takes 648 seconds 😭 And it's 120 MB.
+left,Javscript environments are difficult, which is why Vercel and Netlify (public deploys) do so well. Try using [buildpacks.io](https://buildpacks.io/) and see if it's any better.<br/><br/>If you're already separating your app between frontend and backend, then it's worth considering a stateless frontend that can be deployed publicly. Potentially even on edge too.
+right,Oh snap.
 {{</chat>}}
 
 Both of these services ended up working within 5 minutes of granting permissions to our repository in GitHub. Moral of the story: pay someone to do it faster.
@@ -585,14 +577,16 @@ COOL. I had no idea what was going on, and so I took my findings to Wilson. I do
 
 And off I went on this journey to look into `systemd`. Helpfully, he sent me a [video](https://youtu.be/UQXIdOb4Mzk), but I did not absorb anything, so he dutifully served as my sentient rubber duck.
 
+<!--
 {{<chat sender="me" position="right">}}
 I tried running `systemctl stop kubelet`, and it got restarted even faster this time. :(
 {{</chat>}}
 
+
 {{<chat sender="Wilson" position="left">}}
 No, `systemd` reads a config somewhere on health check. Did you find that file?
 {{</chat>}}
-
+-->
 Mentioning "that [configuration] file" jogged my memory, and I retrieved the code snippet I remembered seeing.
 
 {{<code language="bash" options="linenostart=465" title="The relevant lines from the EKS [`bootstrap.sh`](https://github.com/awslabs/amazon-eks-ami/blob/c5a09beba2c4bdb8ac18a3eaa319685716368637/files/bootstrap.sh#L465-L470)">}}
@@ -604,6 +598,7 @@ EOF
 fi
 {{</code>}}
 
+<!--
 {{<chat sender="me" position="right">}}The problem though is that the `/etc/systemd/system/kubelet.service.d/30-kubelet-extra-args.conf` file exists already, and it has something else in it.
 
 So, I'm going to guess that even if I do write my own args to that file, EKS is going to overwrite it again based on that script snippet.
@@ -616,7 +611,7 @@ Yes, name your file 31.
 {{<chat sender="me" position="right">}}
 🤯 omg, 30 has no meaning...
 {{</chat>}}
-
+-->
 Well, it's not that 30 has no meaning, but more that the file doesn't have to be named 30. In fact, what I learned was that `systemd` makes sure that particular programs are running with tht correct configurations. More specifically, those configurations have a certain precedence. And when Wilson said to "name [my] file 31," he was referring to the `systemd` documentation that states, "for options which accept just a single value, the entry in the file sorted last takes precedence."[^2]
 
 Armed with that knowledge, my launch template just required a few more tweaks for my `userdata.tpl` file (passed through Terraform). Why do 31 when I can bump it straight up to 99?
@@ -682,4 +677,3 @@ Thank you for proofreading my post and providing feedback!
 
 [^1]: EKS has no automatic node health repair. https://aws.amazon.com/premiumsupport/knowledge-center/eks-node-status-ready/
 [^2]: [`man systemd-system.conf`](https://man7.org/linux/man-pages/man5/systemd-system.conf.5.html#CONFIGURATION_DIRECTORIES_AND_PRECEDENCE)
-

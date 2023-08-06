@@ -1,15 +1,22 @@
+{{ $name := .Get "recipient" }}
+{{- $lines := split (trim .Inner " ") "\n" -}}
 <div class="chat">
-  {{ $name := .Get "sender" }}
-  {{ $position := .Get "position" }}
-  <div class="chat-{{ $position }}">
-    <div class="chat-name"><b>{{ $name }}</b></div>
-    <div class="chat-inner">
-    {{ $inner := .Inner | markdownify }}
-    {{ $replaceFirstEnd:= replace $inner "</p>" "</span>" 1 }}
-    {{ $replaceFirstStart := replace $replaceFirstEnd "<p>" "<span>" 1 }}
-    {{ $replaceRestEnds := replace $replaceFirstStart "</p>" "</div>" -1 }}
-    {{ $replaceRestStarts := replace $replaceRestEnds "<p>" "<br /><div style=\"margin-top:6px\">" -1 }}
-    {{ $replaceRestStarts | safeHTML }}
-    </div>
+   <div class="chat-recipient">{{$name}}</div>
+   <div class="chat-body">
+      {{- range $lines -}}
+      {{- $line := trim . " " -}}
+      {{- $match := findRESubmatch `^(left|right),(.*)$` $line -}}
+      {{- if gt (len $match) 0 -}}
+         {{- $submatch := index $match 0 }}
+         {{- $position := trim (index $submatch 1) " " -}}
+         {{- $message := trim (index $submatch 2) " " -}}
+         <div class="chat-container-{{ $position }}">
+            <div tabindex="0" class="chat-message-{{ $position }}">
+               {{ $message | safeHTML }}
+               <div class="chat-message-tail-{{ $position }}"></div>
+            </div>
+         </div>
+      {{- end -}}
+  {{- end -}}
   </div>
 </div>

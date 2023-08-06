@@ -31,6 +31,7 @@ Enter ChatGPT (3.5)!
 > **ASIDE**\
 > I made the mistake of writing a prompt that was too generic (forgot the `in postgresql` part) the first time, but it's nice you can continue to finetune it.
 
+<!--
 {{<chat sender="me" position="right">}}
 write plsql in postgresql to raise a notice about how many rows and which rows were updated
 {{</chat>}}
@@ -187,3 +188,5 @@ sum by (C) (
 For my day-to-day as a software engineer, ChatGPT is a great rubber duck. 🦆 But as with everything, (1) don't run unvetted code in production (I ran everything in a local environment for isolation) and (2) stay on your toes and double check all results.
 
 I'm excited to use it for initial research for new projects!
+
+-->
