@@ -1,3 +1,7 @@
+.chat {
+  margin-bottom: 8px;
+}
+
 .chat-recipient {
   background-color: #2d2d2d;
   padding-top: 12px;
@@ -9,7 +13,7 @@
 }
 
 .chat-body {
-  background-color: #141414;
+  background-color: #182825;
   padding-top: 4px;
   padding-bottom: 12px;
   padding-left: 28px;
@@ -18,64 +22,61 @@
   border-bottom-right-radius: 8px;
 }
 
-.chat-container-right {
+.chat-container {
   display: flex;
+  color: #e4e4e4;
+}
+
+.chat-container-right {
   justify-content: right;
   align-items: right;
-  color: #ffffff;
 }
 
 .chat-container-left {
-  display: flex;
   justify-content: left;
   align-items: left;
-  color: #ffffff;
+}
+
+.chat-message {
+  margin-top: 8px;
+  font-size: small;
+  position: relative;
+  padding: 1rem;
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  max-width: 85%;
+  width: fit-content;
 }
 
 .chat-message-left {
-  margin-top: 8px;
-  font-size: small;
-  position: relative;
-  padding: 1rem;
-  border-bottom-right-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  width: 24rem;
-  background-color: #141f66;
-  z-index: 100;
+  background-color: #227c9d;
 }
 
 .chat-message-right {
-  margin-top: 8px;
-  font-size: small;
-  position: relative;
-  padding: 1rem;
-  border-bottom-right-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  width: 24rem;
-  background-color: #3a76f0;
+  background-color: #22aed1;
+}
+
+/* The tail of the chat bubble, which is an absolutely positioned triangle relative
+   to the chat message. */
+.chat-message-tail {
+  position: absolute;
+  bottom: 0;
+  border-top: 14px solid transparent;
 }
 
 .chat-message-tail-right {
-  position: absolute;
-  bottom: 0;
   right: -16px;
-  border-left: 16px solid #3a76f0; /* Width of the bottom side of the triangle */
-  border-right: 16px solid transparent; /* Width of the left side of the triangle */
-  border-bottom: 14px solid #3a76f0; /* Width of the right side of the triangle */
-  border-top: 14px solid transparent; /* Width of the top side of the triangle */
+  border-left: 16px solid #22aed1;
+  border-right: 16px solid transparent;
+  border-bottom: 14px solid #22aed1;
+  border-top: 14px solid transparent;
 }
 
 .chat-message-tail-left {
-  position: absolute;
-  bottom: 0;
   left: -16px;
-  border-right: 16px solid #141f66; /* Width of the bottom side of the triangle */
-  border-left: 16px solid transparent; /* Width of the left side of the triangle */
-  border-bottom: 14px solid #141f66; /* Width of the right side of the triangle */
-  border-top: 14px solid transparent; /* Width of the top side of the triangle */
-  z-index: 1;
+  border-left: 16px solid transparent;
+  border-right: 16px solid #227c9d;
+  border-bottom: 14px solid #227c9d;
 }

@@ -31,12 +31,11 @@ Enter ChatGPT (3.5)!
 > **ASIDE**\
 > I made the mistake of writing a prompt that was too generic (forgot the `in postgresql` part) the first time, but it's nice you can continue to finetune it.
 
-<!--
-{{<chat sender="me" position="right">}}
+{{<chat recipient="ChatGPT">}}
+%right%
 write plsql in postgresql to raise a notice about how many rows and which rows were updated
-{{</chat>}}
 
-{{<chat sender="ChatGPT" position="left">}}
+%left%
 In PostgreSQL, you can use the `GET DIAGNOSTICS` statement along with the `ROW_COUNT` and `FOUND` variables to determine the number of rows updated, and the `RETURNING` clause to retrieve the updated rows' information. Here's an example of PL/pgSQL code to achieve this:
 
 ```plpgsql
@@ -66,13 +65,11 @@ Make sure to replace `your_table` with the actual name of your table, `column1 =
 When executed, this PL/pgSQL block will update the specified rows, raise a notice indicating the number of rows updated, and if there were any updated rows, it will also raise a notice displaying the updated rows' information.
 
 Remember to execute the code within a PL/pgSQL environment or a PostgreSQL client tool that supports executing PL/pgSQL code to see the raised notices.
-{{</chat>}}
 
-{{<chat sender="me" position="right">}}
+%right%
 allow the update to return multiple rows into the variable
-{{</chat>}}
 
-{{<chat sender="ChatGPT" position="left">}}
+%left%
 To allow the update to return multiple rows into a variable in PostgreSQL, you can use an array variable along with the `RETURNING` clause. Here's an example of PL/pgSQL code to achieve this:
 
 ```plpgsql
@@ -117,11 +114,11 @@ This code snippet ended up working for me straight out of the box after I replac
 
 I started writing Prometheus queries and wasn't familiar with the syntax. The general concept of vectors made sense to me, but I was having a hard time wrapping my head around the one-to-many matchings for the binary operators. Specifically, I wanted to combine two instant vectors where one vector had 1 more label than the other, but I wanted to join on other labels and keep the additional label at the end. This sent me down a rabbit hole of trying to modify the vector labels.
 
-{{<chat sender="me" position="right">}}
+{{<chat recipient="ChatGPT">}}
+%right%
 filter out labels from a prometheus timeseries
-{{</chat>}}
 
-{{<chat sender="ChatGPT" position="left">}}
+%left%
 To filter out specific labels from a Prometheus time series, you can use the `drop` function in PromQL. The `drop` function allows you to exclude certain labels from the resulting time series.
 
 Here's the syntax to drop labels from a Prometheus time series:
@@ -145,11 +142,11 @@ By applying the `drop` function with the desired labels, you can filter out spec
 
 ⛔️ um what? This `drop` function doesn't exist anywhere within Prometheus's documentation on [functions](https://prometheus.io/docs/prometheus/latest/querying/functions/).
 
-{{<chat sender="me" position="right">}}
+{{<chat recipient="ChatGPT">}}
+%right%
 is there a function that's the opposite of drop
-{{</chat>}}
 
-{{<chat sender="ChatGPT" position="left">}}
+%left%
 Yes, there is a function in PromQL that is the opposite of `drop`. It's called `keep` and allows you to retain specific labels while removing all other labels from a Prometheus time series.
 
 Here's the syntax to use the `keep` function:
@@ -188,5 +185,3 @@ sum by (C) (
 For my day-to-day as a software engineer, ChatGPT is a great rubber duck. 🦆 But as with everything, (1) don't run unvetted code in production (I ran everything in a local environment for isolation) and (2) stay on your toes and double check all results.
 
 I'm excited to use it for initial research for new projects!
-
--->
