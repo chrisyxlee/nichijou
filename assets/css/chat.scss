@@ -1,0 +1,118 @@
+$base-container-styles: (
+  display: flex,
+  color: #e4e4e4,
+);
+
+$base-message-styles: (
+  margin-top: 8px,
+  font-size: small,
+  position: relative,
+  padding: 1rem,
+  border-bottom-right-radius: 1rem,
+  border-bottom-left-radius: 1rem,
+  border-top-left-radius: 1rem,
+  border-top-right-radius: 1rem,
+  max-width: 85%,
+  width: fit-content,
+);
+
+$base-tail-styles: (
+  position: absolute,
+  bottom: 0,
+  border-top: 14px solid transparent,
+);
+
+.chat {
+  margin-bottom: 8px;
+
+  .chat-recipient {
+    background-color: #817dab;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 28px;
+    padding-right: 28px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+
+    img {
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
+      margin-right: 12px;
+    }
+
+    div {
+      display: inline-block;
+      align-self: center;
+    }
+
+    svg {
+      margin-left: 12px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .chat-body {
+    background-color: #211e45;
+    padding-top: 4px;
+    padding-bottom: 12px;
+    padding-left: 28px;
+    padding-right: 28px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+
+    .chat-container-right {
+      @each $rule, $value in $base-container-styles {
+        #{$rule}: $value;
+      }
+      justify-content: right;
+      align-items: right;
+
+      .chat-message-tail {
+        @each $rule, $value in $base-tail-styles {
+          #{$rule}: $value;
+        }
+        right: -16px;
+        border-left: 16px solid #646185;
+        border-right: 16px solid transparent;
+        border-bottom: 14px solid #646185;
+      }
+
+      .chat-message {
+        @each $rule, $value in $base-message-styles {
+          #{$rule}: $value;
+        }
+        background-color: #646185;
+      }
+    }
+
+    .chat-container-left {
+      @each $rule, $value in $base-container-styles {
+        #{$rule}: $value;
+      }
+      justify-content: left;
+      align-items: left;
+
+      .chat-message-tail {
+        @each $rule, $value in $base-tail-styles {
+          #{$rule}: $value;
+        }
+        left: -16px;
+        border-left: 16px solid transparent;
+        border-right: 16px solid #393478;
+        border-bottom: 14px solid #393478;
+      }
+
+      .chat-message {
+        @each $rule, $value in $base-message-styles {
+          #{$rule}: $value;
+        }
+        background-color: #393478;
+      }
+    }
+  }
+}

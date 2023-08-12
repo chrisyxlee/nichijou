@@ -11,8 +11,8 @@
   padding: 5px 8px; /* Some padding */
   border-radius: 5px; /* Rounded corners */
   font-size: 20px; /* Increase font size */
-}
 
-#back-to-top:hover {
-  background-color: #62425e; /* Add a dark-grey background on hover */
+  :hover {
+    background-color: #62425e; /* Add a dark-grey background on hover */
+  }
 }
