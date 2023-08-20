@@ -1,37 +1,44 @@
 {{ define "main" }}
 	{{ with .Content }}
-	  <div class="index-contents">
-		  {{ . }}
-		</div>
+      <div class="index-contents">
+         {{ . }}
+      </div>
 	{{ end }}
 
-  <div class="posts">
-    <h1 class="post-title">{{ .Title }}</h1>
-    {{ range sort .Site.Taxonomies.tags }}
-      {{ $c := substr .Page.Title 0 1 | upper }}
-      {{ $savedChar := $.Scratch.Get "savedChar" }}
+	<div class="posts">
+      <h1 class="post-title">{{ .Title }}</h1>
+      <div class="tags-grid">
+         {{ range $i, $tag := sort .Site.Taxonomies.tags }}
+            {{ with $tag }}
+               {{ $c := substr .Page.Title 0 1 | upper }}
+               {{ $savedChar := $.Scratch.Get "savedChar" }}
 
-      {{ if ne $c $savedChar }}
-        {{ if ne $savedChar "" }}
-          </ul>
-          </article>
-        {{ end }}
+               {{ if ne $c $savedChar }}
+                  {{ if and (ne $savedChar "") (gt $i 0) }}
+                     </ul>
+                     </article>
+                     </div>
+                  {{ end }}
 
-        {{ $.Scratch.Set "savedChar" $c }}
-        {{ $.Scratch.Set "nonEmpty" "true" }}
+                  {{ $.Scratch.Set "savedChar" $c }}
+                  {{ $.Scratch.Set "nonEmpty" "true" }}
 
-        <h2>{{ $c }}</h2>
-        <article class="on-list">
-        <ul>
-      {{ end }}
+                  <div class="tags-box">
+                  <h2 style="font-size:32px;">{{ $c }}</h2>
+                  <article class="on-list">
+                  <ul>
+               {{ end }}
 
-      <li>
-        <a href="{{ .Page.Permalink }}">{{ .Page.Title }} ({{ .Count }})</a>
-      </li>
-    {{- end -}}
-    {{ if eq ($.Scratch.Get "nonEmpty") "true" }}
-      </ul>
-      </article>
-    {{ end }}
-  </div>
+               <li>
+               <a href="{{ .Page.Permalink }}">{{ .Page.Title }} ({{ .Count }})</a>
+               </li>
+            {{ end }}
+         {{ end }}
+         {{ if eq ($.Scratch.Get "nonEmpty") "true" }}
+            </ul>
+            </article>
+            </div>
+         {{ end }}
+      </div>
+	</div>
 {{ end }}

@@ -1,0 +1,17 @@
+.tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+  overflow: auto;
+
+  .tags-box {
+    width: fit-content;
+    height: auto;
+    box-sizing: border-box;
+    flex-shrink: 1;
+    max-width: 100%;
+    margin: 12px;
+  }
+}
