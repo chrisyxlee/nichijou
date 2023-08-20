@@ -1,58 +1,30 @@
 {{ define "main" }}
-  <h1>listing posts for #{{ .Title }}</h1>
-  <p>see all <a href="/tags">tags</a></p>
-  {{ with .Content }}
-    <div class="index-content">
-      {{ . }}
-    </div>
-  {{ end }}
-  <div class="posts">
-    {{ range .Paginator.Pages }}
-      <article class="post on-list">
-        <h1 class="post-title">
-          <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
-        </h1>
-        <div class="post-meta">
-          {{- if .Date -}}
-            <time class="post-date">
-              {{- .Date.Format "2006-01-02" -}}
-            </time>
-          {{- end -}}
-          {{- with .Params.Author -}}
-            <span class="post-author">{{- . -}}</span>
-          {{- end -}}
-        </div>
+	<h1>listing posts for #{{ .Title }}</h1>
+	<p>see all <a href="/tags">tags</a></p>
+	{{ with .Content }}
+		<div class="index-content">
+			{{ . }}
+		</div>
+	{{ end }}
+	<div class="posts">
+		{{ $blogs := where .Paginator.Pages "Type" "blog" }}
+		{{ $pics := where .Paginator.Pages "Type" "pics" }}
 
-        {{ if .Params.tags }}
-          <span class="post-tags">
-            {{ range .Params.tags }}
-            #<a href="{{ (urlize (printf "tags/%s/" . )) | absLangURL }}">
-              {{- . -}}
-            </a>&nbsp;
-            {{ end }}
-          </span>
-        {{ end }}
+		<article class="post on-list">
 
-        {{ partial "cover.html" . }}
+			{{ if gt (len $blogs) 0 }}
+				<h1 class="post-title">blog entries</h1>
+				{{ range $blogs }}
+					{{ partial "blog/entry.html" (dict "post" . "showYear" true) }}
+				{{ end }}
+			{{ end }}
 
-        <div class="post-content">
-          {{ if .Params.showFullContent }}
-            {{ .Content }}
-          {{ else if .Description }}
-            {{ .Description | markdownify }}
-          {{ else }}
-            {{ .Summary }}
-          {{ end }}
-        </div>
+			{{ if gt (len $pics) 0 }}
+				<h1 class="post-title">pics</h1>
+				{{ partial "pics/list.html" $pics }}
+			{{ end }}
 
-        {{ if not .Params.showFullContent }}
-          <div>
-            <a class="read-more button" href="{{.RelPermalink}}">{{ $.Site.Params.ReadMore }} →</a>
-          </div>
-        {{ end }}
-      </article>
-    {{ end }}
-
-    {{ partial "pagination.html" . }}
-  </div>
+		</article>
+		{{ partial "pagination.html" . }}
+	</div>
 {{ end }}
