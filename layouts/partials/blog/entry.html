@@ -1,0 +1,18 @@
+{{ $showYear := index . "showYear" }}
+{{ with index . "post" }}
+	<div style="display:flex; margin-bottom: 8px;">
+		<div style="flex: 0 0 auto; padding-right: 8px; margin-right: 8px; width:fit-content; border-right: solid;">
+			<b>{{ if $showYear }}{{ .Date.Format "Jan 2 2006" }}{{ else }}{{ .Date.Format "Jan 2" }}{{ end }}</b>
+		</div>
+		<div>
+			<a href="{{ .Permalink }}">{{ .Title | markdownify }}</a><br />
+			{{ with .Params.tags }}
+				<span class="post-tags" style="flex: 1; margin-bottom:0px;">
+				   {{ range . }}
+					   #<a href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>&nbsp;
+				   {{ end }}
+			   </span>
+			{{ end }}
+		</div>
+	</div>
+{{ end }}
