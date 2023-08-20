@@ -1,6 +1,7 @@
 {{ range slice
       "css/chat.scss"
       "css/back_to_top.scss"
+      "css/pics.scss"
       "css/overlay.scss" }}
   {{ $css := resources.Get . | resources.ToCSS | minify }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
