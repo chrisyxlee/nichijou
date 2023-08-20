@@ -1,0 +1,19 @@
+{{ $shouldShow := or .HasPrev .HasNext }}
+{{ if $shouldShow }}
+<div class="pagination">
+	 <div class="pagination__buttons">
+		{{ if .HasPrev }}
+				<a href="{{ .Prev.URL }}" class="button previous">
+				<span class="button__icon">←</span>
+				<span class="button__text">Newer posts</span>
+			</a>
+		{{ end }}
+		{{ if .HasNext }}
+			<a href="{{ .Next.URL }}" class="button next">
+				<span class="button__text">Older posts</span>
+				<span class="button__icon">→</span>
+			</a>
+		{{ end }}
+	</div>
+</div>
+{{end}}
