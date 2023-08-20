@@ -1,5 +1,12 @@
-{{ $showYear := index . "showYear" }}
-{{ with index . "post" }}
+{{ if not (isset . "showYear" )}}
+   {{ errorf "'showYear' is required to use this partial %+v" . }}
+{{ end }}
+{{ if not (isset . "Page" )}}
+   {{ errorf "'Page' is required to use this partial %+v" . }}
+{{ end }}
+
+{{ $showYear := .showYear }}
+{{ with .Page }}
 	<div style="display:flex; margin-bottom: 8px;">
 		<div style="flex: 0 0 auto; padding-right: 8px; margin-right: 8px; width: 70px; border-right: solid;">
 			<b>{{ if $showYear }}{{ .Date.Format "Jan 2 2006" }}{{ else }}{{ .Date.Format "Jan 2" }}{{ end }}</b>

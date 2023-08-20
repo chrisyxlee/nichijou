@@ -5,14 +5,16 @@
 		</div>
 	{{ end }}
 
+	{{ $pager := .Paginate (where .Site.RegularPages "Type" "blog") }}
 	<div class="posts">
-		{{ range (where .Site.RegularPages "Type" "in" (slice "blog")).GroupByDate "2006" }}
+		{{ range $pager.Pages.GroupByDate "2006" }}
 			<article class="on-list">
 				<h1 class="post-title">{{ .Key }}</h1>
 				{{ range .Pages }}
-					{{ partial "blog/entry.html" (dict "post" . "showYear" false) }}
+					{{ partial "blog/entry.html" (dict "Page" . "showYear" false) }}
 				{{ end }}
 			</article>
 		{{ end }}
 	</div>
+	{{ partial "pagination.html" (dict "Paginator" $pager) }}
 {{ end }}

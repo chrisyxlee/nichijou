@@ -8,6 +8,6 @@
 	<div class="posts">
       {{ $pager := .Paginate (where .Site.RegularPages "Type" "pics") }}
       {{ partial "pics/list.html" $pager.Pages }}
-      {{ partial "paginator.html" $pager }}
 	</div>
+	{{ partial "pagination.html" (dict "Paginator" $pager) }}
 {{ end }}

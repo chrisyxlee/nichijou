@@ -2,12 +2,11 @@
    {{ errorf "'images' is required in YAML frontmatter for %+v" . }}
 {{ end }}
 
-{{ $images := index .Params "images" }}
-{{ if eq (len $images) 0 }}
+{{ if eq (len .Params.images) 0 }}
    {{ errorf "'images' requires at least 1 element %+v" . }}
 {{ end }}
 
-{{ $thumbnail := index $images 0 }}
+{{ $thumbnail := index .Params.images 0 }}
 <div class="pics-card">
    <div class="pics-container">
       <img src="{{ $thumbnail.src }}" draggable="false" alt="{{ $thumbnail.alt }}" />

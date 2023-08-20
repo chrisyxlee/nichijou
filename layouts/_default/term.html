@@ -6,24 +6,25 @@
 		</div>
 	{{ end }}
 	<div class="posts">
-		{{ $blogs := where .Paginator.Pages "Type" "blog" }}
-		{{ $pics := where .Paginator.Pages "Type" "pics" }}
 
-		<article class="post on-list">
+		{{ range (.Paginator.Pages.GroupBy "Type") }}
+		   <article class="post on-list">
+               {{ $firstType:= (index .Pages 0).Type }}
 
-			{{ if gt (len $blogs) 0 }}
-				<h1 class="post-title">blog entries</h1>
-				{{ range $blogs }}
-					{{ partial "blog/entry.html" (dict "post" . "showYear" true) }}
-				{{ end }}
-			{{ end }}
+		   	   {{ if eq $firstType "blog" }}
+		   	   	<h1 class="post-title">blog entries</h1>
+		   	   	{{ range .Pages }}
+		   	   		{{ partial "blog/entry.html" (dict "Page" . "showYear" true) }}
+		   	   	{{ end }}
+		   	   {{ end }}
 
-			{{ if gt (len $pics) 0 }}
-				<h1 class="post-title">pics</h1>
-				{{ partial "pics/list.html" $pics }}
-			{{ end }}
+		   	   {{ if eq $firstType "pics" }}
+		   	   	<h1 class="post-title">pics</h1>
+		   	   	{{ partial "pics/list.html" .Pages }}
+		   	   {{ end }}
 
-		</article>
+		   </article>
+      {{ end }}
 		{{ partial "pagination.html" . }}
 	</div>
 {{ end }}
