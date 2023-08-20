@@ -1,0 +1,6 @@
+
+<span class="post-tags" style="flex: 1; margin-bottom:0px;">
+	{{ range (sort .) }}
+		#<a href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>&nbsp;
+	{{ end }}
+</span>
