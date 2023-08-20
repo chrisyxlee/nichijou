@@ -1,0 +1,18 @@
+{{ define "main" }}
+	{{ with .Content }}
+		<div class="index-content">
+			{{ . }}
+		</div>
+	{{ end }}
+
+	<div class="posts">
+		{{ range (where .Site.RegularPages "Type" "in" (slice "blog")).GroupByDate "2006" }}
+			<article class="on-list">
+				<h1 class="post-title">{{ .Key }}</h1>
+				{{ range .Pages }}
+					{{ partial "blog/entry.html" (dict "post" . "showYear" false) }}
+				{{ end }}
+			</article>
+		{{ end }}
+	</div>
+{{ end }}

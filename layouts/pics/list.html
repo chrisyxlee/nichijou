@@ -1,0 +1,13 @@
+{{ define "main" }}
+	{{ with .Content }}
+		<div class="index-content">
+			{{ . }}
+		</div>
+	{{ end }}
+
+	<div class="posts">
+      {{ $pager := .Paginate (where .Site.RegularPages "Type" "pics") }}
+      {{ partial "pics/list.html" $pager.Pages }}
+      {{ partial "paginator.html" $pager }}
+	</div>
+{{ end }}
