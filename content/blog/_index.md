@@ -2,6 +2,7 @@
 title: blog
 aliases:
 - /b/
+layout: blog
 ---
 
-ramblings, no rhyme or reason. see all [tags](/tags).
+ramblings, no rhyme or reason.

@@ -94,6 +94,10 @@ languages:
           identifier: "now"
           name: "now"
           url: "/now"
+        - weight: 101
+          identifier: "tags"
+          name: "tags"
+          url: "/tags"
 
 markup:
   tableOfContents:
