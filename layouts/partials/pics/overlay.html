@@ -1,6 +1,10 @@
+{{ if not (isset .Params "link") }}
+   {{ errorf "'links' is required in YAML frontmatter for %+v" . }}
+{{ end }}
+{{ $link := index .Params "link" }}
 <div class="content">
    <div class="pics-header">
-      <div class="pics-title"><a href="{{ .Permalink }}">{{ .Title }}</a></div>
+      <div class="pics-title"><a href="{{ $link }}" target="_blank">{{ .Title }}</a></div>
       {{ with index .Params "location" }}
          <div class="pics-location icon-container">
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

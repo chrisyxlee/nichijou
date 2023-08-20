@@ -82,7 +82,11 @@ languages:
           identifier: "blog"
           name: "blog"
           url: "/blog"
-        - weight: 99
+        - weight: 10
+          identifier: "pics"
+          name: "pics"
+          url: "/pics"
+        - weight: 15
           identifier: "about"
           name: "about"
           url: "/about"
