@@ -1,12 +1,6 @@
 {{ define "main" }}
-	{{ with .Content }}
-      <div class="index-contents">
-         {{ . }}
-      </div>
-	{{ end }}
-
-	<div class="posts">
-      <h1 class="post-title">{{ .Title }}</h1>
+	<article class="post">
+      <h1 class="post-title">{{ lower .Title }}</h1>
       <div class="tags-grid">
          {{ range $i, $tag := sort .Site.Taxonomies.tags }}
             {{ with $tag }}
@@ -40,5 +34,5 @@
             </div>
          {{ end }}
       </div>
-	</div>
+	</article>
 {{ end }}
