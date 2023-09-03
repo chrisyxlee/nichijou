@@ -15,9 +15,12 @@
   {{ $bg_style = "#6b382930" }}
 {{ end }}
 
-{{ $options := "lineNos=inline" }}
-{{ if .Get "options" }}
-  {{ $options = (printf "%s,%s" $options (.Get "options")) }}
+{{ $options := "" }}
+{{ if ne (.Get "lineNos") "false" }}
+   {{ $options = "lineNos=inline" }}
+   {{ if .Get "options" }}
+     {{ $options = (printf "%s,%s" $options (.Get "options")) }}
+   {{ end }}
 {{ end }}
 
 {{ if .Get "language" }}
