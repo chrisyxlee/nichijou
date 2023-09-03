@@ -2,12 +2,12 @@
 
 👋 yo.
 
-This is a collection of my thoughts.
+I'm a software engineer with experience in backend feature and API development, data pipelines for ML, developer productivity, and infrastructure management (Kubernetes). I work best when given an ideal outcome and the autonomy to figure out the details.
 
-Feel free to learn more [`about`](/about) me or what I'm up to right
-[`now`](/now).
+I have a lot of opinions about reliability, organizational sustainability, and code health. I love spreadsheets and diagrams as storytelling tools.
 
-Sometimes I'll write things in the [`blog`](/blog) or post in [`pics`](/pics). \
-I used to play piano and made some [`music`](/sheet_music) sheets.
+Currently, I'm based in SF working at a stealth startup!
 
-Not entirely sure how it works, but here's the [`RSS`](/index.xml).
+## links
+
+[`email`](mailto:chris.yx.lee@gmail.com) | [`github`](https://www.github.com/chrisyxlee) | [`linkedin`](https://www.linkedin.com/in/chrisyxlee) | [`mastodon`](https://hachyderm.io/@chrisyxlee) | [`twitter`](https://www.twitter.com/chrisyxlee) | [`resume`](/chrisyxlee_resume.pdf)

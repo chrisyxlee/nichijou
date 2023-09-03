@@ -86,10 +86,6 @@ languages:
           identifier: "pics"
           name: "pics"
           url: "/pics"
-        - weight: 15
-          identifier: "about"
-          name: "about"
-          url: "/about"
         - weight: 100
           identifier: "now"
           name: "now"
