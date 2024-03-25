@@ -24,7 +24,7 @@
                {{ end }}
 
                <li>
-               <a href="{{ .Page.Permalink }}">{{ .Page.Title }} ({{ .Count }})</a>
+               <a href="{{ .Page.Permalink }}">{{ .Page.Title | lower }} ({{ .Count }})</a>
                </li>
             {{ end }}
          {{ end }}
