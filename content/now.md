@@ -1,9 +1,9 @@
 ---
 title: "now"
-date: "2023-09-03"
+date: "2024-03-24"
 ---
 
 - working at a stealth startup
-- playing tunes as a bard in [Baldur's Gate 3](https://baldursgate3.game/)
-- watching as much [isekai](https://en.wikipedia.org/wiki/Isekai) anime as I can
-- e-bike life
+- [hell divin'](https://store.steampowered.com/app/553850/HELLDIVERS_2/) for democracy and liberation
+- thinking about next meal
+- walky walky
