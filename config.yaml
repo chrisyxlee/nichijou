@@ -2,6 +2,7 @@ baseurl: "https://chrisyxlee.com/"
 languageCode: "en-us"
 theme: "terminal"
 paginate: 10
+enableRobotsTXT: true
 
 params:
   # dir name of your main content (default is `content/posts`).
