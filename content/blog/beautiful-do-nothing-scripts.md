@@ -8,6 +8,7 @@ cover: /img/do-nothing/04b-confirm.png
 tags:
   - automation
   - reliability
+summary: I want to show off demo screenshots and code snippets from a do-nothing script I wrote last year. 🥺
 ---
 
 > NOTE: I got permission to post this. :)
