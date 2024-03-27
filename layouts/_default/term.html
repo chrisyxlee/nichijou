@@ -1,5 +1,5 @@
 {{ define "main" }}
-	<h1>listing posts for #{{ .Title }}</h1>
+	<h1>listing posts for #{{ .Title | lower }}</h1>
 	{{ with .Content }}
 		<div class="index-content">
 			{{ . }}
